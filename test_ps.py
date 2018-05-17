@@ -2,11 +2,14 @@ import requests
 import urllib
 import json
 import csv
+#import urllib  
+import urllib.parse
+import urllib.request
 
 # Can get a max of 500 comments per call
 subreddit_url = 'https://api.pushshift.io/reddit/search/comment/?subreddit=politics&size=500'
 
-r = requests.get(test_url)
+r = requests.get('https://www.reddit.com/')
 
 page_json = r.json()
 
