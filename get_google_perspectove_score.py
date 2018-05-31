@@ -40,18 +40,19 @@ def getPerspective(res_file, file):
 			for item in comment_res: # for each row
 				print(i)
 				if i == 0:
-					item.append("pscore") # adds pscore attribute
+					item.append("perspective_score") # adds pscore attribute
 				else:
-					pscore = runPerspective(item[0]) # gets pscore of comment
+					pscore = runPerspective(item[1]) # gets pscore of comment
 					item.append(pscore) # appends pscore to end of row
 				i = i + 1
 				writer.writerow(item) # write cur row to output file res_file
 	print("done")
 
 def main(): # change this to a loop to call all files within a bigQueryData dir
-	getPerspective("pineapplecharmPscore.csv", "bigQueryData/pineapplecharm.csv")
-	getPerspective("sosorrynonamePscore.csv", "bigQueryData/sosorrynoname.csv")
-	getPerspective("parent_id=t3_20myzoPscore.csv", "bigQueryData/parent_id=t3_20myzo.csv")
+	# getPerspective("pineapplecharmPscore.csv", "bigQueryData/pineapplecharm.csv")
+	# getPerspective("sosorrynonamePscore.csv", "bigQueryData/sosorrynoname.csv")
+	# getPerspective("parent_id=t3_20myzoPscore.csv", "bigQueryData/parent_id=t3_20myzo.csv")
+	getPerspective("all_result2.csv", "bigQueryData/all_result1.csv")
 
 if __name__== "__main__":
 	main()
