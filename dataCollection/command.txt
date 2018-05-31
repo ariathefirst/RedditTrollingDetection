@@ -1,0 +1,2 @@
+cat *.csv >merged.csv 
+
