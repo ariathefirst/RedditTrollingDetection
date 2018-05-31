@@ -46,7 +46,7 @@ def getPerspective(res_file, file):
 					if i == 0:
 						item.append("perspective_score") # adds pscore attribute
 						item.append("p_perspective_score")
-					elif i > 4035:
+					elif i > 6098:
 						pscore = runPerspective(item[1]) # gets pscore of comment
 						p_pscore = runPerspective(item[11]) # gets parent pscore of comment
 						item.append(pscore) # appends pscore to end of row
@@ -65,7 +65,7 @@ def main(): # change this to a loop to call all files within a bigQueryData dir
 	# getPerspective("pineapplecharmPscore.csv", "bigQueryData/pineapplecharm.csv")
 	# getPerspective("sosorrynonamePscore.csv", "bigQueryData/sosorrynoname.csv")
 	# getPerspective("parent_id=t3_20myzoPscore.csv", "bigQueryData/parent_id=t3_20myzo.csv")
-	getPerspective("all_result4.csv", "bigQueryData/all_result1.csv")
+	getPerspective("all_result6.csv", "bigQueryData/all_result1.csv")
 
 if __name__== "__main__":
 	main()
