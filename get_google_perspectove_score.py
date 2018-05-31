@@ -7,6 +7,9 @@ import googleapiclient
 from googleapiclient import discovery
 import sys
 
+# sound alarm if program halts
+import os
+
 def runPerspective(str):
 	API_KEY='AIzaSyAlCwhKJ0C8n4eFM-ioPC5-MCFYy4P-TT8'
 
@@ -33,26 +36,36 @@ reddit = praw.Reddit(client_id='OlM6d2hKSrhbkw',
 
 def getPerspective(res_file, file):
 	i = 0
-	with open(res_file, "w+") as w:
-		writer = csv.writer(w, delimiter = ",")
-		with open(file, 'rU') as f:
-			comment_res = csv.reader(f, delimiter = ",")
-			for item in comment_res: # for each row
-				print(i)
-				if i == 0:
-					item.append("perspective_score") # adds pscore attribute
-				else:
-					pscore = runPerspective(item[1]) # gets pscore of comment
-					item.append(pscore) # appends pscore to end of row
-				i = i + 1
-				writer.writerow(item) # write cur row to output file res_file
+	try:
+		with open(res_file, "w+") as w:
+			writer = csv.writer(w, delimiter = ",")
+			with open(file, 'rU') as f:
+				comment_res = csv.reader(f, delimiter = ",")
+				for item in comment_res: # for each row
+					print(i)
+					if i == 0:
+						item.append("perspective_score") # adds pscore attribute
+						item.append("p_perspective_score")
+					elif i > 4035:
+						pscore = runPerspective(item[1]) # gets pscore of comment
+						p_pscore = runPerspective(item[11]) # gets parent pscore of comment
+						item.append(pscore) # appends pscore to end of row
+						item.append(p_pscore) 
+						writer.writerow(item) # write cur row to output file res_file
+					i = i + 1
+	except:
+		duration = 1  # second
+		freq = 440  # Hz
+		os.system('play --no-show-progress --null --channels 1 synth %s sine %f' % (duration, freq))
+		os.system('say "your program stopped unexpectedly"')
 	print("done")
+	os.system('say "your program has finished"')
 
 def main(): # change this to a loop to call all files within a bigQueryData dir
 	# getPerspective("pineapplecharmPscore.csv", "bigQueryData/pineapplecharm.csv")
 	# getPerspective("sosorrynonamePscore.csv", "bigQueryData/sosorrynoname.csv")
 	# getPerspective("parent_id=t3_20myzoPscore.csv", "bigQueryData/parent_id=t3_20myzo.csv")
-	getPerspective("all_result2.csv", "bigQueryData/all_result1.csv")
+	getPerspective("all_result4.csv", "bigQueryData/all_result1.csv")
 
 if __name__== "__main__":
 	main()
