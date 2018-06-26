@@ -46,7 +46,7 @@ def getPerspective(res_file, file):
 					if i == 0:
 						item.append("perspective_score") # adds pscore attribute
 						item.append("p_perspective_score")
-					elif i > 6098:
+					else:
 						pscore = runPerspective(item[1]) # gets pscore of comment
 						p_pscore = runPerspective(item[11]) # gets parent pscore of comment
 						item.append(pscore) # appends pscore to end of row
